@@ -1,0 +1,128 @@
+<script>
+  import { gsap } from "gsap";
+  import { ScrollTrigger } from "gsap/ScrollTrigger";
+
+  gsap.registerPlugin(ScrollTrigger);
+  ScrollTrigger.config({
+    ignoreMobileResize: true,
+    limitCallbacks: true,
+  });
+
+  let motionContext: ReturnType<typeof gsap.context> | undefined;
+
+  const reveal = (targets: gsap.TweenTarget, fromY = 42, stagger = 0) => {
+    gsap.fromTo(
+      targets,
+      {
+        autoAlpha: 0,
+        y: fromY,
+        force3D: true,
+        willChange: "transform, opacity",
+      },
+      {
+        autoAlpha: 1,
+        y: 0,
+        duration: 0.9,
+        ease: "power3.out",
+        stagger,
+        overwrite: "auto",
+        clearProps: "transform,opacity,visibility,willChange",
+      },
+    );
+  };
+
+  const conceal = (targets: gsap.TweenTarget, toY: number, stagger = 0) => {
+    gsap.to(targets, {
+      autoAlpha: 0,
+      y: toY,
+      duration: 0.48,
+      ease: "power2.inOut",
+      stagger,
+      overwrite: "auto",
+      force3D: true,
+      willChange: "transform, opacity",
+    });
+  };
+
+  const initScrollAnimations = () => {
+    motionContext?.revert();
+
+    motionContext = gsap.context(() => {
+      const reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+      const main = document.querySelector("main");
+      if (!main) return;
+
+      const sections = Array.from(main.querySelectorAll(":scope > section"));
+      const hero = sections[0];
+      const contentSections = sections.slice(1);
+      const scrollItems = Array.from(main.querySelectorAll("article, form"));
+
+      if (reduceMotion) {
+        gsap.set([...sections, ...scrollItems], {
+          clearProps: "all",
+          autoAlpha: 1,
+        });
+        return;
+      }
+
+      if (hero) {
+        const heroImage = hero.querySelector("img");
+        const heroContent = hero.querySelectorAll("h1, h1 + p, a");
+
+        if (heroContent.length) {
+          gsap.fromTo(
+            heroContent,
+            { autoAlpha: 0, y: 30, force3D: true },
+            {
+              autoAlpha: 1,
+              y: 0,
+              duration: 0.85,
+              ease: "power3.out",
+              stagger: 0.09,
+              delay: 0.12,
+              clearProps: "transform,opacity,visibility",
+            },
+          );
+        }
+      }
+
+      contentSections.forEach((section) => {
+        gsap.set(section, { autoAlpha: 0, y: 48 });
+
+        ScrollTrigger.create({
+          trigger: section,
+          start: "top 88%",
+          end: "bottom 12%",
+          onEnter: () => reveal(section, 48),
+          onLeave: () => conceal(section, -24),
+          onEnterBack: () => reveal(section, -30),
+          onLeaveBack: () => conceal(section, 36),
+        });
+      });
+
+      if (scrollItems.length) {
+        ScrollTrigger.batch(scrollItems, {
+          start: "top 92%",
+          end: "bottom 8%",
+          interval: 0.08,
+          batchMax: 3,
+          onEnter: (batch) => reveal(batch, 34, 0.08),
+          onLeave: (batch) => conceal(batch, -18, 0.035),
+          onEnterBack: (batch) => reveal(batch, -22, 0.07),
+          onLeaveBack: (batch) => conceal(batch, 26, 0.035),
+        });
+      }
+
+      const refresh = () => ScrollTrigger.refresh();
+      if (document.fonts?.ready) document.fonts.ready.then(refresh);
+
+      if (document.readyState === "complete") {
+        refresh();
+      } else {
+        window.addEventListener("load", refresh, { once: true });
+      }
+    }, document.body);
+  };
+
+  initScrollAnimations();
+</script>

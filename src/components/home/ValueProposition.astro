@@ -1,33 +1,17 @@
 ---
+const items = [
+    { icon: 'verified', title: 'Certificación por equipo', body: 'Evidencia concreta por cada máquina que aprendes a operar.' },
+    { icon: 'engineering', title: 'Práctica en equipos reales', body: 'Entrenamiento orientado a maniobras, seguridad y rendimiento.' },
+    { icon: 'work_history', title: 'Enfoque laboral', body: 'Preparación para minería, construcción, agricultura y logística.' },
+];
 ---
-<section id="propuesta" class="bg-surface-container-high py-14 border-y-2 border-outline-variant scroll-mt-20">
+<section id="propuesta" class="bg-primary py-14 border-y-2 border-[#d99c00] scroll-mt-20 hazard-stripes">
     <div class="px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto grid grid-cols-1 md:grid-cols-3 gap-8">
-        <div class="flex items-center gap-4 group">
-            <div class="flex-shrink-0 w-16 h-16 bg-surface-container-highest border-2 border-primary flex items-center justify-center">
-                <span class="material-symbols-outlined text-primary text-4xl" data-weight="fill">verified</span>
+        {items.map((item) => (
+            <div class="flex items-center gap-4 group">
+                <div class="flex-shrink-0 w-16 h-16 bg-surface-dim flex items-center justify-center"><span class="material-symbols-outlined text-primary text-4xl" data-weight="fill">{item.icon}</span></div>
+                <div><h3 class="font-headline-md text-headline-md uppercase text-on-primary">{item.title}</h3><p class="font-body-md text-body-md text-on-primary/75">{item.body}</p></div>
             </div>
-            <div>
-                <h3 class="font-headline-md text-headline-md uppercase text-primary">Certificación por equipo</h3>
-                <p class="font-body-md text-body-md text-on-surface-variant">Evidencia concreta por cada máquina que aprendes a operar.</p>
-            </div>
-        </div>
-        <div class="flex items-center gap-4 group">
-            <div class="flex-shrink-0 w-16 h-16 bg-surface-container-highest border-2 border-primary flex items-center justify-center">
-                <span class="material-symbols-outlined text-primary text-4xl" data-weight="fill">engineering</span>
-            </div>
-            <div>
-                <h3 class="font-headline-md text-headline-md uppercase text-primary">Práctica en equipos reales</h3>
-                <p class="font-body-md text-body-md text-on-surface-variant">Entrenamiento orientado a maniobras, seguridad y rendimiento.</p>
-            </div>
-        </div>
-        <div class="flex items-center gap-4 group">
-            <div class="flex-shrink-0 w-16 h-16 bg-surface-container-highest border-2 border-primary flex items-center justify-center">
-                <span class="material-symbols-outlined text-primary text-4xl" data-weight="fill">work_history</span>
-            </div>
-            <div>
-                <h3 class="font-headline-md text-headline-md uppercase text-primary">Enfoque laboral</h3>
-                <p class="font-body-md text-body-md text-on-surface-variant">Preparación para minería, construcción, agricultura y logística.</p>
-            </div>
-        </div>
+        ))}
     </div>
 </section>

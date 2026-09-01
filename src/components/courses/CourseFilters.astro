@@ -1,0 +1,53 @@
+<aside class="lg:w-64 lg:shrink-0">
+  <div class="lg:sticky lg:top-28">
+    <details class="group border border-outline-variant bg-white lg:border-0 lg:bg-transparent" open>
+      <summary class="flex cursor-pointer list-none items-center justify-between p-5 font-headline-md text-2xl font-bold uppercase text-on-surface lg:hidden">
+        Filtrar programas
+        <span class="material-symbols-outlined transition-transform group-open:rotate-180" aria-hidden="true">expand_more</span>
+      </summary>
+
+      <form id="course-filters" class="grid gap-8 border-t border-outline-variant p-5 lg:border-0 lg:p-0">
+        <fieldset>
+          <legend class="mb-4 border-l-4 border-primary pl-3 font-headline-md text-2xl font-bold uppercase text-on-surface">Categorías</legend>
+          <div class="grid gap-2">
+            {[
+              ["all", "Todos los cursos"],
+              ["movimiento", "Movimiento de tierras"],
+              ["vialidad", "Vialidad"],
+              ["mineria", "Minería y canteras"],
+            ].map(([value, label], index) => (
+              <label class="flex cursor-pointer items-center gap-3 p-3 transition-colors hover:bg-surface-container has-[:checked]:bg-surface-container has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-primary">
+                <input class="size-4 accent-primary" type="radio" name="category" value={value} checked={index === 0} />
+                <span>{label}</span>
+              </label>
+            ))}
+          </div>
+        </fieldset>
+
+        <fieldset>
+          <legend class="mb-4 border-l-4 border-primary pl-3 font-headline-md text-2xl font-bold uppercase text-on-surface">Nivel</legend>
+          <div class="grid gap-2">
+            <label class="flex cursor-pointer items-center gap-3 p-3 transition-colors hover:bg-surface-container has-[:checked]:bg-surface-container has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-primary">
+              <input class="size-4 accent-primary" type="checkbox" name="level" value="operacion" checked />
+              <span>Básico (operación)</span>
+            </label>
+            <label class="flex cursor-pointer items-center gap-3 p-3 transition-colors hover:bg-surface-container has-[:checked]:bg-surface-container has-[:focus-visible]:outline-2 has-[:focus-visible]:outline-primary">
+              <input class="size-4 accent-primary" type="checkbox" name="level" value="mantenimiento" checked />
+              <span>Avanzado (mantenimiento)</span>
+            </label>
+          </div>
+        </fieldset>
+
+        <div class="relative overflow-hidden bg-surface-dim p-6 text-white shadow-xl">
+          <div class="absolute -bottom-12 -right-12 size-36 rounded-full bg-primary/15 blur-xl"></div>
+          <span class="material-symbols-outlined mb-3 text-4xl text-primary" aria-hidden="true">support_agent</span>
+          <h2 class="font-headline-md text-3xl font-bold uppercase text-primary">¿No sabes cuál elegir?</h2>
+          <p class="relative mt-2 text-white/70">Un asesor puede ayudarte a encontrar la formación adecuada para ti.</p>
+          <a href="#inscripcion" class="relative mt-6 inline-flex w-full items-center justify-center border-2 border-primary px-4 py-3 font-label-md text-sm font-bold uppercase text-primary transition-colors hover:bg-primary hover:text-on-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+            Hablar con un asesor
+          </a>
+        </div>
+      </form>
+    </details>
+  </div>
+</aside>

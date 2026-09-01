@@ -3,6 +3,11 @@ import "../styles/global.css";
 import Analytics from "@vercel/analytics/astro";
 import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
+import ScrollAnimations from "../components/ScrollAnimations.astro";
+
+const title = "Escuela Larminer | Maquinaria Pesada en Chiclayo";
+const description = "Aprende operación y mantenimiento de maquinaria pesada en Chiclayo. Larminer enseña 6 máquinas al costo de una, con práctica en equipos reales y certificación por máquina.";
+const ogImage = "/images/larminer-og.png";
 ---
 
 <!doctype html>
@@ -10,17 +15,32 @@ import Footer from "../components/Footer.astro";
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width" />
-        <title>Escuela Larminer | Maquinaria Pesada en Chiclayo</title>
-        <meta
-            name="description"
-            content="Aprende operación y mantenimiento de maquinaria pesada en Chiclayo. Larminer enseña 6 máquinas al costo de una, con práctica en equipos reales y certificación por máquina."
-        />
+        <title>{title}</title>
+        <meta name="description" content={description} />
+        <meta name="theme-color" content="#062846" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
+
+        <meta property="og:locale" content="es_PE" />
+        <meta property="og:type" content="website" />
+        <meta property="og:title" content={title} />
+        <meta property="og:description" content={description} />
+        <meta property="og:image" content={ogImage} />
+        <meta property="og:image:width" content="1200" />
+        <meta property="og:image:height" content="630" />
+        <meta property="og:image:type" content="image/png" />
+        <meta property="og:image:alt" content="Larminer: aprende haciendo, opera en grande" />
+
+        <meta name="twitter:card" content="summary_large_image" />
+        <meta name="twitter:title" content={title} />
+        <meta name="twitter:description" content={description} />
+        <meta name="twitter:image" content={ogImage} />
+        <meta name="twitter:image:alt" content="Larminer: aprende haciendo, opera en grande" />
     </head>
     <body class="bg-background text-on-surface font-body-md">
         <Header />
         <slot />
         <Footer />
+        <ScrollAnimations />
         <a
             aria-label="Chat with us on WhatsApp"
             class="fixed bottom-8 right-8 z-[100] bg-[#25D366] text-white w-16 h-16 rounded-full flex items-center justify-center shadow-2xl hover:scale-110 active:scale-95 transition-transform"

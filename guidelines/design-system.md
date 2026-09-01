@@ -1,23 +1,23 @@
 ---
-name: Larminer Industrial
+name: Larminer Escuela Industrial
 colors:
-  surface: '#141311'
-  surface-dim: '#141311'
-  surface-bright: '#3b3936'
-  surface-container-lowest: '#0f0e0c'
-  surface-container-low: '#1d1b19'
-  surface-container: '#21201d'
-  surface-container-high: '#2b2a27'
-  surface-container-highest: '#363532'
-  on-surface: '#e7e2dd'
-  on-surface-variant: '#cec6be'
-  outline: '#979089'
-  outline-variant: '#4b4641'
-  primary: '#e8600a'
-  on-primary: '#ffffff'
-  primary-container: '#4d1c00'
-  on-primary-container: '#ffdbcc'
-  secondary: '#4a4a5a'
+  surface: '#f6f8fa'
+  surface-dim: '#062846'
+  surface-bright: '#ffffff'
+  surface-container-lowest: '#041c32'
+  surface-container-low: '#ffffff'
+  surface-container: '#eef3f7'
+  surface-container-high: '#e3ebf1'
+  surface-container-highest: '#d5e1e9'
+  on-surface: '#072743'
+  on-surface-variant: '#4e6273'
+  outline: '#6e8291'
+  outline-variant: '#c7d3dc'
+  primary: '#ffb800'
+  on-primary: '#062846'
+  primary-container: '#ffd45c'
+  on-primary-container: '#062846'
+  secondary: '#0b4f7e'
   on-secondary: '#ffffff'
   secondary-container: '#333342'
   on-secondary-container: '#e1e0f0'
@@ -43,12 +43,13 @@ typography:
 # Larminer Industrial Design System
 
 ## Identidad Visual
-El sistema de diseño para Larminer está inspirado en la industria pesada, la minería y la construcción. Utiliza un contraste alto entre el carbón profundo y el naranja de seguridad para transmitir potencia, autoridad y profesionalismo técnico.
+El sistema visual parte de la identidad real de Larminer: azul marino, amarillo maquinaria y blanco. La combinación comunica formación técnica, práctica real y energía joven sin perder autoridad industrial.
 
 ## Colores Clave
-- **Safety Orange (#E8600A)**: Color de acción principal para CTAs y elementos críticos.
-- **Deep Charcoal (#141311)**: Superficie base para un look industrial moderno.
-- **Steel Gray (#4A4A5A)**: Utilizado para elementos secundarios y contenedores.
+- **Machinery Yellow (#FFB800)**: Acción principal, señalética y acentos de alto contraste.
+- **Larminer Navy (#062846)**: Fondo institucional para hero, navegación y cierres de sección.
+- **Technical Blue (#0B4F7E)**: Jerarquía secundaria, etiquetas y títulos técnicos.
+- **Workshop White (#F6F8FA)**: Superficie clara que deja protagonismo a las fotografías.
 
 ## Tipografía
 - **Headlines**: Barlow Condensed (Bold). Impactante y legible, ideal para jerarquías claras en entornos técnicos.

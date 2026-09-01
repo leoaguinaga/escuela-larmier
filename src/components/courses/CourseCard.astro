@@ -1,0 +1,62 @@
+---
+import type { Course } from "../../data/courses";
+
+interface Props {
+  course: Course;
+}
+
+const { course } = Astro.props;
+---
+
+<article
+  class="course-card group flex h-full flex-col overflow-hidden border border-outline-variant bg-white shadow-[0_8px_30px_rgba(6,40,70,.08)] transition-all duration-300 hover:-translate-y-1 hover:shadow-[0_16px_38px_rgba(6,40,70,.15)]"
+  data-category={course.category}
+  data-level={course.level}
+  data-duration={course.duration}
+  data-name={course.name}
+>
+  <div class="relative h-52 overflow-hidden bg-surface-container-high sm:h-56">
+    <img
+      src={course.image}
+      alt={course.name}
+      class={`h-full w-full object-cover transition-transform duration-500 group-hover:scale-105 ${course.imagePosition ?? "object-center"}`}
+      loading="lazy"
+    />
+    <div class="absolute inset-0 bg-surface-dim/15 transition-colors group-hover:bg-transparent"></div>
+    {course.badge && (
+      <span class:list={[
+        "absolute right-4 top-4 px-3 py-1.5 font-label-md text-xs font-bold uppercase tracking-wider shadow-md",
+        course.badgeTone === "navy" ? "border border-primary/40 bg-surface-dim text-primary" : "bg-primary text-on-primary",
+      ]}>
+        {course.badge}
+      </span>
+    )}
+  </div>
+
+  <div class="flex flex-1 flex-col border-t-4 border-primary p-6">
+    <p class="flex items-center gap-2 text-sm font-semibold uppercase tracking-wider text-on-surface-variant">
+      <span class="material-symbols-outlined text-xl" aria-hidden="true">{course.icon}</span>
+      {course.categoryLabel}
+    </p>
+    <h2 class="mt-3 font-headline-md text-3xl font-bold uppercase leading-none text-secondary transition-colors group-hover:text-on-surface mb-4">
+      {course.name}
+    </h2>
+    <p class="text-on-surface-variant mt-auto">{course.description}</p>
+
+    <dl class="mt-6 grid grid-cols-2 gap-4 border-y border-outline-variant py-4">
+      <div>
+        <dt class="text-xs font-semibold uppercase tracking-wider text-on-surface-variant">Duración</dt>
+        <dd class="mt-1 font-semibold text-on-surface">{course.duration} horas</dd>
+      </div>
+      <div>
+        <dt class="text-xs font-semibold uppercase tracking-wider text-on-surface-variant">Práctica</dt>
+        <dd class="mt-1 font-semibold text-on-surface">{course.practice}% en campo</dd>
+      </div>
+    </dl>
+
+    <a href="#inscripcion" class="mt-6 inline-flex items-center justify-center gap-2 bg-surface-container-high px-5 py-3 font-label-md text-sm font-bold uppercase text-on-surface transition-colors hover:bg-primary hover:text-on-primary focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-primary">
+      Solicitar información
+      <span class="material-symbols-outlined text-xl transition-transform group-hover:translate-x-1" aria-hidden="true">arrow_forward</span>
+    </a>
+  </div>
+</article>
