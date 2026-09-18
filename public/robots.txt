@@ -1,0 +1,5 @@
+User-agent: *
+Disallow: /cursos
+Allow: /
+
+Sitemap: https://escuela-larminer.vercel.app/sitemap.xml

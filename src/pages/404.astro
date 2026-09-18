@@ -1,0 +1,42 @@
+---
+import Layout from '../layouts/Layout.astro';
+import VerifyHelp from '../components/verify/VerifyHelp.astro';
+---
+
+<Layout
+  title="Página no encontrada | Escuela Larminer"
+  description="La página que buscas no existe o el código de certificado ingresado no es válido."
+  noindex
+>
+  <main>
+    <section class="relative isolate min-h-[280px] overflow-hidden bg-surface-dim md:min-h-[320px]">
+      <div class="industrial-overlay absolute inset-0 -z-10"></div>
+      <div class="hazard-stripes absolute inset-0 -z-10 opacity-20"></div>
+      <div class="mx-auto flex min-h-[280px] max-w-container-max items-center px-margin-mobile py-12 md:min-h-[320px] md:px-margin-desktop">
+        <div class="max-w-3xl">
+          <p class="font-label-md text-label-md text-primary uppercase mb-3">Error 404</p>
+          <h1 class="font-headline-xl text-4xl font-bold uppercase leading-[.98] text-white sm:text-5xl">
+            Página <span class="text-primary">no encontrada</span>
+          </h1>
+        </div>
+      </div>
+    </section>
+
+    <section class="py-16 md:py-24 bg-surface scroll-mt-20">
+      <div class="px-margin-mobile md:px-margin-desktop max-w-2xl mx-auto text-center border border-dashed border-outline-variant p-8">
+        <p class="font-body-lg text-body-lg text-on-surface-variant mb-6">
+          La página que buscas no existe. Si venías a verificar un certificado, revisa que el código esté escrito tal
+          como aparece impreso, sin espacios adicionales.
+        </p>
+        <a
+          class="inline-block bg-primary text-on-primary font-headline-md text-headline-md px-8 py-4 font-bold uppercase hover:bg-primary-container transition-colors"
+          href="/verifica"
+        >
+          Verificar un certificado
+        </a>
+      </div>
+    </section>
+
+    <VerifyHelp />
+  </main>
+</Layout>

@@ -1,0 +1,148 @@
+---
+import Layout from '../../layouts/Layout.astro';
+import VerifyHero from '../../components/verify/VerifyHero.astro';
+import BottomCTA from '../../components/home/BottomCTA.astro';
+import { demoCertificateIndex, type Certificado, type PerfilOperador } from '../../data/certificaciones';
+
+export function getStaticPaths() {
+  return Object.entries(demoCertificateIndex).map(([codigo, perfil]) => ({
+    params: { codigo },
+    props: { perfil, codigo },
+  }));
+}
+
+interface Props {
+  perfil: PerfilOperador;
+  codigo: string;
+}
+
+const { perfil, codigo } = Astro.props;
+const certificado = perfil.certificados.find((c: Certificado) => c.codigo === codigo)!;
+const otros = perfil.certificados.filter((c: Certificado) => c.codigo !== codigo);
+const isVigente = certificado.estado === 'vigente';
+---
+
+<Layout
+  title={`Certificado ${certificado.codigo} | Escuela Larminer`}
+  description={`Verificación del certificado ${certificado.codigo} de ${perfil.nombre}, operador de ${certificado.maquina} certificado por Escuela Larminer.`}
+  noindex
+>
+  <main>
+    <VerifyHero />
+
+    <section class="py-16 md:py-24 bg-surface scroll-mt-20">
+      <div class="px-margin-mobile md:px-margin-desktop max-w-3xl mx-auto">
+        <div
+          class:list={[
+            'flex items-start gap-4 p-6 md:p-8 border-l-4 mb-8',
+            isVigente ? 'bg-primary-container/20 border-primary' : 'bg-error-container/10 border-error',
+          ]}
+        >
+          <span
+            class:list={['material-symbols-outlined text-5xl shrink-0', isVigente ? 'text-primary' : 'text-error']}
+            aria-hidden="true">{isVigente ? 'verified' : 'cancel'}</span
+          >
+          <div>
+            <p
+              class:list={[
+                'font-headline-md text-headline-md uppercase mb-1',
+                isVigente ? 'text-on-surface' : 'text-error',
+              ]}
+            >
+              {isVigente ? 'Certificado vigente y válido' : 'Certificado revocado'}
+            </p>
+            <p class="font-body-md text-body-md text-on-surface-variant">
+              {isVigente
+                ? 'Este código corresponde a un certificado emitido por Escuela Larminer y actualmente vigente.'
+                : 'Este certificado ya no es válido y no acredita la operación de esta máquina.'}
+            </p>
+          </div>
+        </div>
+
+        <article class="bg-white border border-outline-variant border-t-4 border-t-primary p-6 md:p-8 mb-10">
+          <p class="font-label-md text-label-md text-secondary uppercase mb-2">Certificado verificado</p>
+          <div class="flex items-start justify-between gap-3 mb-4">
+            <h2 class="font-headline-lg text-headline-lg text-on-surface uppercase">{certificado.maquina}</h2>
+            <span
+              class:list={[
+                'shrink-0 font-label-md text-label-md uppercase px-3 py-1 font-bold',
+                isVigente ? 'bg-primary text-on-primary' : 'bg-outline-variant text-on-surface-variant',
+              ]}>{isVigente ? 'Vigente' : 'Revocado'}</span
+            >
+          </div>
+          <dl class="grid sm:grid-cols-3 gap-4 font-body-md text-body-md text-on-surface-variant">
+            <div>
+              <dt class="font-label-md text-label-md font-bold text-on-surface uppercase mb-1">Emitido</dt>
+              <dd>{certificado.fecha}</dd>
+            </div>
+            <div>
+              <dt class="font-label-md text-label-md font-bold text-on-surface uppercase mb-1">Instructor</dt>
+              <dd>{certificado.instructor}</dd>
+            </div>
+            <div>
+              <dt class="font-label-md text-label-md font-bold text-on-surface uppercase mb-1">Práctica</dt>
+              <dd>{certificado.horasPractica} horas en equipo real</dd>
+            </div>
+          </dl>
+        </article>
+
+        <div class="bg-surface-dim text-white p-6 md:p-8 mb-10">
+          <p class="font-label-md text-label-md text-primary uppercase mb-2">Operador certificado</p>
+          <h3 class="font-headline-lg text-headline-lg uppercase mb-1">{perfil.nombre}</h3>
+          <p class="font-body-md text-body-md text-white/70 mb-4">
+            DNI {perfil.dni} &middot; Egresado {perfil.egresado}
+          </p>
+          <p class="inline-flex items-center gap-2 font-label-md text-label-md text-primary uppercase">
+            <span class="material-symbols-outlined text-lg" aria-hidden="true">verified</span>
+            Verificado por Escuela Larminer &middot; Chiclayo, Perú
+          </p>
+        </div>
+
+        {
+          otros.length > 0 && (
+            <div>
+              <p class="font-label-md text-label-md text-secondary uppercase mb-3">
+                Otros certificados de este operador
+              </p>
+              <div class="grid sm:grid-cols-2 gap-gutter">
+                {otros.map((cert: Certificado) => {
+                  const vigente = cert.estado === 'vigente';
+                  return (
+                    <article class="bg-white border border-outline-variant p-5">
+                      <div class="flex items-start justify-between gap-3 mb-3">
+                        <h4 class="font-headline-md text-headline-md text-secondary uppercase">{cert.maquina}</h4>
+                        <span
+                          class:list={[
+                            'shrink-0 font-label-md text-label-md uppercase px-3 py-1 font-bold',
+                            vigente ? 'bg-primary text-on-primary' : 'bg-outline-variant text-on-surface-variant',
+                          ]}
+                        >
+                          {vigente ? 'Vigente' : 'Revocado'}
+                        </span>
+                      </div>
+                      <dl class="grid gap-1 font-body-md text-body-md text-on-surface-variant">
+                        <div>
+                          <dt class="inline font-bold text-on-surface">Emitido:</dt> <dd class="inline">{cert.fecha}</dd>
+                        </div>
+                        <div>
+                          <dt class="inline font-bold text-on-surface">Instructor:</dt>{' '}
+                          <dd class="inline">{cert.instructor}</dd>
+                        </div>
+                        <div>
+                          <dt class="inline font-bold text-on-surface">Práctica:</dt>{' '}
+                          <dd class="inline">{cert.horasPractica} horas en equipo real</dd>
+                        </div>
+                      </dl>
+                    </article>
+                  );
+                })}
+              </div>
+            </div>
+          )
+        }
+      </div>
+    </section>
+
+    <BottomCTA />
+  </main>
+</Layout>

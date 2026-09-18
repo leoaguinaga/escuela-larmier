@@ -5,8 +5,17 @@ import Header from "../components/Header.astro";
 import Footer from "../components/Footer.astro";
 import ScrollAnimations from "../components/ScrollAnimations.astro";
 
-const title = "Escuela Larminer | Maquinaria Pesada en Chiclayo";
-const description = "Aprende operación y mantenimiento de maquinaria pesada en Chiclayo. Larminer enseña 6 máquinas al costo de una, con práctica en equipos reales y certificación por máquina.";
+interface Props {
+    title?: string;
+    description?: string;
+    noindex?: boolean;
+}
+
+const {
+    title = "Escuela Larminer | Maquinaria Pesada en Chiclayo",
+    description = "Aprende operación y mantenimiento de maquinaria pesada en Chiclayo. Larminer enseña 6 máquinas al costo de una, con práctica en equipos reales y certificación por máquina.",
+    noindex = false,
+} = Astro.props;
 const ogImage = "/images/larminer-og.png";
 ---
 
@@ -17,6 +26,7 @@ const ogImage = "/images/larminer-og.png";
         <meta name="viewport" content="width=device-width" />
         <title>{title}</title>
         <meta name="description" content={description} />
+        {noindex && <meta name="robots" content="noindex, nofollow" />}
         <meta name="theme-color" content="#062846" />
         <link rel="icon" type="image/svg+xml" href="/favicon.svg" />
 

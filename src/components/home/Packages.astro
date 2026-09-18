@@ -1,0 +1,119 @@
+---
+const packages = [
+    {
+        duration: "12 meses",
+        machines: 6,
+        title: "Plan Integral",
+        body: "Sal certificado en las 6 máquinas. Perfil completo para minería, obra, campo y logística.",
+        featured: true,
+    },
+    {
+        duration: "3 meses",
+        machines: 2,
+        title: "Plan Inicial",
+        body: "Sal certificado en 2 máquinas. Ideal para dar tu primer paso con base técnica real.",
+        featured: false,
+    },
+    {
+        duration: "6 meses",
+        machines: 4,
+        title: "Plan Operador",
+        body: "Sal certificado en 4 máquinas. El equilibrio entre tiempo de formación y empleabilidad.",
+        featured: false,
+    },
+];
+---
+
+<section id="paquetes" class="py-24 bg-surface-dim scroll-mt-20">
+    <div
+        class="px-margin-mobile md:px-margin-desktop max-w-container-max mx-auto"
+    >
+        <div class="grid lg:grid-cols-[1fr_auto] gap-6 items-end mb-12">
+            <div>
+                <p
+                    class="font-label-md text-label-md text-primary uppercase mb-3"
+                >
+                    Elige tu ritmo de formación
+                </p>
+                <h2
+                    class="font-headline-lg text-headline-lg text-white uppercase mb-4"
+                >
+                    Tres paquetes. Certificación por cada máquina.
+                </h2>
+                <p class="font-body-lg text-body-lg text-white/70 max-w-2xl">
+                    A más tiempo de formación, más máquinas certificadas en tu
+                    perfil de operador.
+                </p>
+            </div>
+        </div>
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-gutter items-stretch">
+            {
+                packages.map((pkg, index) => (
+                    <article
+                        class:list={[
+                            "group flex flex-col bg-white border transition-transform duration-300 hover:-translate-y-1",
+                            pkg.featured
+                                ? "border-primary shadow-[0_16px_40px_rgba(6,40,70,.16)] lg:-translate-y-3"
+                                : "border-outline-variant shadow-[0_8px_30px_rgba(6,40,70,.08)]",
+                        ]}
+                    >
+                        <div
+                            class:list={[
+                                "border-t-4 px-6 pt-6",
+                                pkg.featured
+                                    ? "border-primary"
+                                    : "border-secondary",
+                            ]}
+                        >
+                            <div class="flex items-center justify-between mb-4">
+                                <span class="font-headline-md text-headline-md font-bold px-3 py-1 bg-surface-dim text-primary">
+                                    0{index + 1}
+                                </span>
+                                {pkg.featured && (
+                                    <span class="font-label-md text-label-md uppercase bg-primary text-on-primary px-3 py-1 font-bold">
+                                        Más elegido
+                                    </span>
+                                )}
+                            </div>
+                            <p class="font-label-md text-label-md text-secondary uppercase mb-2">
+                                {pkg.title}
+                            </p>
+                            <h3 class="font-headline-lg text-4xl text-on-surface uppercase mb-1">
+                                {pkg.duration}
+                            </h3>
+                            <p class="font-body-md text-body-md text-on-surface-variant">
+                                Duración del programa
+                            </p>
+                        </div>
+                        <div class="flex-1 flex flex-col px-6 pb-6 pt-5">
+                            <div class="flex items-baseline gap-2 mb-4 pb-4 border-b border-outline-variant">
+                                <span class="font-headline-xl text-5xl text-primary font-bold leading-none">
+                                    {pkg.machines}
+                                </span>
+                                <span class="font-headline-md text-headline-md text-on-surface uppercase">
+                                    {pkg.machines === 1
+                                        ? "máquina certificada"
+                                        : "máquinas certificadas"}
+                                </span>
+                            </div>
+                            <p class="font-body-md text-body-md text-on-surface-variant mb-6">
+                                {pkg.body}
+                            </p>
+                            <a
+                                class:list={[
+                                    "mt-auto font-headline-md text-headline-md px-6 py-4 font-bold uppercase text-center transition-colors",
+                                    pkg.featured
+                                        ? "bg-primary text-on-primary border-b-4 border-[#bd8700] active:translate-y-1 active:border-b-0 hover:bg-primary-container"
+                                        : "border-2 border-secondary text-secondary hover:bg-secondary hover:text-on-secondary",
+                                ]}
+                                href="#inscripcion"
+                            >
+                                Elegir {pkg.duration}
+                            </a>
+                        </div>
+                    </article>
+                ))
+            }
+        </div>
+    </div>
+</section>
